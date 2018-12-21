@@ -7,6 +7,14 @@
   ],
   "scripts": {},
   "env": {
+    "GITHUB_APP_ID": {
+      "description": "The GitHub OAuth app ID",
+      "required": true
+    },
+    "GITHUB_APP_SECRET": {
+      "description": "The GitHub OAuth app secret",
+      "required": true
+    },
     "RACK_ENV": {
       "description": "The rack environment used to differentiate production from staging in rollbar",
       "value": "production"
