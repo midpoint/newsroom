@@ -1,1 +1,7 @@
 Welcome!
+
+<% if user_signed_in? %>
+  <%= current_user %>
+<% else %>
+  <%= link_to "Sign in", user_github_omniauth_authorize_path %>
+<% end %>
