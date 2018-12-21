@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_135824) do
   enable_extension "plpgsql"
 
   create_table "feeds", force: :cascade do |t|
+    t.string "title"
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
