@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :rememberable,
     :omniauthable, omniauth_providers: %i[github]
+
+  has_and_belongs_to_many :feeds
 
   validates :username, presence: true
   validates :email, presence: true
