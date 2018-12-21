@@ -5,6 +5,7 @@ ruby '2.5.3'
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 gem 'pg'
+gem 'sidekiq'
 
 gem 'devise'
 gem 'omniauth-github'
