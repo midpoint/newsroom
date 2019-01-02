@@ -3,6 +3,7 @@
   "description": "An RSS reader",
   "keywords": [],
   "addons": [
+    "heroku-redis",
     "heroku-postgresql"
   ],
   "scripts": {},
