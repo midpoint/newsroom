@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://dmathieu.com/">
+  <id>http://test.local/</id>
+  <title>My Own Blog</title>
+  <updated>2018-10-18T00:00:00Z</updated>
+  <link rel="alternate" href="http://test.local/"/>
+  <link rel="self" href="http://test.local/feed.xml"/>
+  <author>
+    <name>Damien MATHIEU</name>
+    <uri>http://test.local</uri>
+  </author>
+  <entry>
+    <id>first-entry</id>
+    <title type="html">First entry</title>
+    <published>2018-10-18T00:00:00Z</published>
+    <updated>2018-10-18T00:00:00Z</updated>
+    <link rel="alternate" href="http://test.local/first/"/>
+    <content type="html">My first entry's content</content>
+    <summary type="html">First summary</summary>
+  </entry>
+  <entry>
+    <id>second-entry</id>
+    <title type="html">Second entry</title>
+    <published>2018-10-18T00:00:00Z</published>
+    <updated>2018-10-18T00:00:00Z</updated>
+    <link rel="alternate" href="http://test.local/second/"/>
+    <content type="html">My second entry's content</content>
+    <summary type="html">Second summary</summary>
+  </entry>
+</feed>
+
