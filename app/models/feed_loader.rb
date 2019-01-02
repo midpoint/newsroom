@@ -7,7 +7,14 @@ class FeedLoader
   end
 
   def title
-    data.title.content
+    case data.feed_type
+    when "atom"
+      data.title.content
+    when "rss"
+      data.channel.title
+    else
+      raise "Not supported"
+    end
   end
 
   private
