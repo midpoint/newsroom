@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
-  let(:github_id)      { SecureRandom.random_number }
+  let(:github_id)    { SecureRandom.random_number }
   let(:username)     { "johndoe" }
   let(:email)        { "johndoe@example.com" }
   let(:github_token) { SecureRandom.uuid }

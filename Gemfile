@@ -6,6 +6,7 @@ gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 gem 'pg'
 gem 'sidekiq'
+gem 'excon'
 
 gem 'devise'
 gem 'omniauth-github'
@@ -23,10 +24,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'dotenv-rails'
-  gem 'rspec-rails'
 end
 
 group :development do
@@ -35,4 +33,11 @@ group :development do
 
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'rspec-sidekiq'
 end
