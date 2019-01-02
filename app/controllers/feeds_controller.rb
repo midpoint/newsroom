@@ -10,6 +10,8 @@ class FeedsController < ApplicationController
 
     if feed.persisted?
       current_user.feeds << feed
+      RefreshFeedWorker.perform_async(feed.id)
+
       redirect_to root_path
     else
       render :new

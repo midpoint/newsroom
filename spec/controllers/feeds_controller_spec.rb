@@ -19,6 +19,8 @@ RSpec.describe FeedsController, type: :controller do
     let(:url)  { Faker::Internet.url }
 
     it "creates a new feed" do
+      expect(RefreshFeedWorker).to receive(:perform_async)
+
       expect do
         post :create, params: { feed: { url: url } }
       end.to change(Feed, :count).by(1)
@@ -29,6 +31,8 @@ RSpec.describe FeedsController, type: :controller do
     end
 
     it "subscribes to an existing feed" do
+      expect(RefreshFeedWorker).to receive(:perform_async).with(feed.id)
+
       expect do
         post :create, params: { feed: { url: feed.url } }
       end.to change(Feed, :count).by(0)
