@@ -70,6 +70,7 @@ GEM
       dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
     erubi (1.8.0)
+    excon (0.62.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   byebug
   devise
   dotenv-rails
+  excon
   factory_bot_rails
   faker
   jbuilder (~> 2.5)

@@ -5,7 +5,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
   let(:loader) { OpenStruct.new(title: title) }
 
   before do
-    FeedLoader.stub(:new).with(feed.url) { loader }
+    expect(FeedLoader).to receive(:new).with(feed.url) { loader }
   end
 
   it "runs" do
