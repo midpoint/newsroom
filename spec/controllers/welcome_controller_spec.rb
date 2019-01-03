@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe WelcomeController, type: :controller do
   describe "index" do
-
     describe "when logged in" do
       before do
         sign_in FactoryBot.create(:user)
