@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :authenticate_user!
+
   def github
     user = find_user!(request.env["omniauth.auth"])
 

@@ -7,6 +7,15 @@ RSpec.describe FeedsController, type: :controller do
     sign_in user
   end
 
+  describe "show" do
+    let(:feed) { FactoryBot.create(:feed) }
+
+    it "renders the template" do
+      get :show, params: { id: feed.id }
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "new" do
     it "renders the template" do
       get :new

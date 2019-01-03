@@ -1,0 +1,14 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <% feeds.each do |feed| %>
+        <li class="nav-item">
+          <%= link_to feed, class: "nav-link" do %>
+            <span data-feather="home"></span>
+            <%= feed_title(feed) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

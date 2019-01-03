@@ -1,8 +1,9 @@
 class WelcomeController < ApplicationController
-
   def index
-    if !user_signed_in?
-      redirect_to user_github_omniauth_authorize_path
-    end
+    @feeds = current_user.feeds
+    @items = Item.
+      where(feed_id: @feeds.map(&:id)).
+      order(published_at: :desc).
+      includes(:feed)
   end
 end
