@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://dmathieu.com/">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://test.local/">
   <id>http://test.local/</id>
   <title>My Own Blog</title>
   <updated>2018-10-18T00:00:00Z</updated>

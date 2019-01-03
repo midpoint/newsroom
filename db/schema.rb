@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_170543) do
+ActiveRecord::Schema.define(version: 2019_01_03_095620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 2018_12_21_170543) do
     t.bigint "user_id", null: false
     t.bigint "feed_id", null: false
     t.index ["user_id", "feed_id"], name: "index_feeds_users_on_user_id_and_feed_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "feed_id"
+    t.string "guid", null: false
+    t.string "title"
+    t.string "url", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guid", "feed_id"], name: "index_items_on_guid_and_feed_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
