@@ -7,6 +7,7 @@ gem 'puma', '~> 3.11'
 gem 'pg'
 gem 'sidekiq'
 gem 'excon'
+gem "sentry-raven"
 
 gem 'devise'
 gem 'omniauth-github'
