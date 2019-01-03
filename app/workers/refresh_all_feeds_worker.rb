@@ -1,5 +1,6 @@
 class RefreshAllFeedsWorker
   include Sidekiq::Worker
+  sidekiq_options unique: :until_and_while_executing
 
   attr_reader :feed_id
 
