@@ -7,7 +7,15 @@ class RefreshFeedWorker
     @feed_id = feed_id
 
     feed.title = data.title
-    feed.save
+    feed.save!
+
+    data.items.each do |item|
+      i = feed.items.where(guid: item.guid).first_or_initialize
+      i.title = item.title
+      i.url = item.url
+      i.published_at = item.published_at
+      i.save!
+    end
   end
 
   private
