@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe RefreshFeedWorker, type: :worker do
   let(:feed)   { FactoryBot.create(:feed) }
   let(:title)  { feed.title }
