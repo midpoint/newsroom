@@ -5,6 +5,21 @@ RSpec.describe FeedLoader, type: :model do
   let(:url)  { Faker::Internet.url(host) }
   subject    { described_class.new(url) }
 
+  describe "with an error" do
+    before :each do
+      Excon.stub(
+        { host: host },
+        { body: "An error occured", status: 503 }
+      )
+    end
+
+    it "raises an exception" do
+      expect do
+        subject.title
+      end.to raise_error(Excon::Error::ServiceUnavailable)
+    end
+  end
+
   describe "with an atom feed" do
     before :each do
       Excon.stub(

@@ -50,6 +50,6 @@ class FeedLoader
   end
 
   def content
-    @content ||= Excon.get(@url).body
+    @content ||= Excon.get(@url, expects: 200).body
   end
 end
