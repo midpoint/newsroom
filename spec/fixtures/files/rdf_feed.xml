@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/rss1full.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><!-- generator="FeedCreator 1.7.2" --><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel rdf:about="http://theoatmeal.com/feed/rss">
+    <title>An RDF Feed</title>
+    <description></description>
+    <link>http://test.local/</link>
+    <dc:date>2019-01-03T17:31:39+01:00</dc:date>
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="http://test.local/first-item" />
+        <rdf:li rdf:resource="http://test.local/second-item" />
+      </rdf:Seq>
+    </items>
+    <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rdf+xml" href="http://feeds.feedburner.com/oatmealfeed" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="oatmealfeed" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /></channel>
+  <item rdf:about="http://test.local/first-item">
+    <dc:format>text/html</dc:format>
+    <dc:date>2018-11-20T18:01:22+01:00</dc:date>
+    <dc:source>http://test.local</dc:source>
+    <dc:creator>Damien Mathieu</dc:creator>
+    <title>First Item</title>
+    <link>http://test.local/first-item</link>
+    <description></description>
+  </item>
+  <item rdf:about="http://test.local/second-item">
+    <dc:format>text/html</dc:format>
+    <dc:date>2018-11-20T18:01:22+01:00</dc:date>
+    <dc:source>http://test.local</dc:source>
+    <dc:creator>Damien Mathieu</dc:creator>
+    <title>Second Item</title>
+    <link>http://test.local/second-item</link>
+    <description></description>
+  </item>
+</rdf:RDF>

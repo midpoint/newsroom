@@ -73,4 +73,31 @@ RSpec.describe FeedLoader, type: :model do
       end
     end
   end
+
+  describe "with an rdf feed" do
+    before :each do
+      Excon.stub(
+        { host: host },
+        { body: file_fixture("rdf_feed.xml"), status: 200 }
+      )
+    end
+
+    it "has the title set" do
+      expect(subject.title).to eql("An RDF Feed")
+    end
+
+    describe "items" do
+      it "has items set" do
+        expect(subject.items.length).to eql(2)
+      end
+
+      it "has items attributes set" do
+        i = subject.items.first
+        expect(i.guid).to eql("http://test.local/first-item")
+        expect(i.title).to eql("First Item")
+        expect(i.url).to eql("http://test.local/first-item")
+        expect(i.published_at).to eql(Time.parse("2018-11-20T18:01:22+01:00"))
+      end
+    end
+  end
 end
