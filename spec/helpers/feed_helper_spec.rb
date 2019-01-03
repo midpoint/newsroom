@@ -6,7 +6,7 @@ describe FeedHelper do
   describe "#feed_title" do
 
     it "returns the title" do
-      helper.feed_title(feed).should eql(feed.title)
+      expect(helper.feed_title(feed)).to eql(feed.title)
     end
 
     describe "when the feed has no title" do
@@ -14,7 +14,7 @@ describe FeedHelper do
 
       it "returns the URI's host" do
         u = URI.parse(feed.url)
-        helper.feed_title(feed).should eql(u.host)
+        expect(helper.feed_title(feed)).to eql(u.host)
       end
     end
   end
