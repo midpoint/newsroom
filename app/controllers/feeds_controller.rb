@@ -1,5 +1,8 @@
 class FeedsController < ApplicationController
-  before_action :authenticate_user!
+  def show
+    @feed = Feed.find(params[:id])
+    @feeds = current_user.feeds
+  end
 
   def new
     @feed = Feed.new

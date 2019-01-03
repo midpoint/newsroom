@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :feeds, only: [:new, :create]
+  resources :feeds, only: [:show, :new, :create]
   root 'welcome#index'
 end

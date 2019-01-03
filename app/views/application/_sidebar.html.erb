@@ -3,10 +3,10 @@
     <ul class="nav flex-column">
       <% feeds.each do |feed| %>
         <li class="nav-item">
-          <a class="nav-link active" href="#">
+          <%= link_to feed, class: "nav-link" do %>
             <span data-feather="home"></span>
             <%= feed_title(feed) %>
-          </a>
+          <% end %>
         </li>
       <% end %>
     </ul>
