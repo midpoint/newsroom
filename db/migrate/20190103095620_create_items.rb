@@ -12,6 +12,6 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :items, :guid, unique: true
+    add_index :items, [:guid, :feed_id], unique: true
   end
 end

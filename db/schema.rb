@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_095620) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guid"], name: "index_items_on_guid", unique: true
+    t.index ["guid", "feed_id"], name: "index_items_on_guid_and_feed_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
