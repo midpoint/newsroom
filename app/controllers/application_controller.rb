@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :set_raven_context
+  before_action :authenticate_user!, :set_raven_context
 
   private
+
+  def authenticate_user!
+    if !user_signed_in?
+      redirect_to user_github_omniauth_authorize_path
+    end
+  end
 
   def set_raven_context
     Raven.user_context(id: current_user.id) if user_signed_in?

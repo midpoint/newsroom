@@ -1,0 +1,8 @@
+<div class="list-group">
+  <% items.each do |item| %>
+    <%= link_to item.url,
+      class: "list-group-item list-group-item-action" do %>
+      <%= item.feed.title %> &bullet; <%= item.title %>
+    <% end %>
+  <% end %>
+</ul>
