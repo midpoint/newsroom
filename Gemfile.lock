@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/feedjira/feedjira.git
+  revision: b91ff6feb9dd3d75c81edc9970f9c025d1dc964c
+  specs:
+    feedjira (3.0.0.beta1)
+      loofah (>= 2.2.1)
+      sax-machine (>= 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -211,6 +219,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sax-machine (1.3.2)
     sentry-raven (2.7.4)
       faraday (>= 0.7.6, < 1.0)
     sidekiq (5.2.3)
@@ -271,6 +280,7 @@ DEPENDENCIES
   excon
   factory_bot_rails
   faker
+  feedjira!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   omniauth-github

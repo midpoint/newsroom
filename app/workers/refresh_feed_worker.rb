@@ -12,17 +12,21 @@ class RefreshFeedWorker
       feed.error = ""
       feed.save!
 
-      data.items.each do |item|
-        i = feed.items.where(guid: item.guid).first_or_initialize
+      data.entries.each do |item|
+        i = feed.items.where(guid: item.entry_id).first_or_initialize
         i.title = item.title
         i.url = item.url
-        i.published_at = item.published_at
+        i.published_at = item.published
         i.save!
       end
     end
+  rescue Excon::Error, Feedjira::NoParserAvailable => e
+    feed.error = e
+    feed.save!
   rescue StandardError => e
     feed.error = e
     feed.save!
+    raise
   end
 
   private

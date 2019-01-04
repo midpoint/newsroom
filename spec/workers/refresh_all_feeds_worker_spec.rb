@@ -11,8 +11,6 @@ RSpec.describe RefreshAllFeedsWorker, type: :worker do
   private
 
   def run!
-    Sidekiq::Testing.inline! do
-      described_class.perform_async
-    end
+    described_class.new.perform
   end
 end

@@ -10,6 +10,7 @@ gem "sidekiq-cron"
 gem 'sidekiq-unique-jobs'
 gem 'excon'
 gem "sentry-raven"
+gem "feedjira", github: "feedjira/feedjira"
 
 gem 'devise'
 gem 'omniauth-github'

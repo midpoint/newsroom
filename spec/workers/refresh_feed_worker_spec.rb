@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe RefreshFeedWorker, type: :worker do
   let(:feed)   { FactoryBot.create(:feed) }
   let(:title)  { feed.title }
-  let(:loader) { OpenStruct.new(title: title, items: items) }
-  let(:items)  { [
+  let(:loader) { OpenStruct.new(title: title, entries: entries) }
+  let(:entries)  { [
     OpenStruct.new(
-      guid: SecureRandom.uuid,
+      entry_id: SecureRandom.uuid,
       title: Faker::DrWho.quote,
       url: Faker::Internet.url,
-      published_at: DateTime.now
+      published: DateTime.now
     )
   ] }
 
@@ -34,10 +34,10 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       end.to change(feed.reload.items, :count).from(0).to(1)
 
       item = feed.items.first
-      expect(item.guid).to eql(items.first.guid)
-      expect(item.title).to eql(items.first.title)
-      expect(item.url).to eql(items.first.url)
-      expect(item.published_at.to_i).to eql(items.first.published_at.to_i)
+      expect(item.guid).to eql(entries.first.entry_id)
+      expect(item.title).to eql(entries.first.title)
+      expect(item.url).to eql(entries.first.url)
+      expect(item.published_at.to_i).to eql(entries.first.published.to_i)
     end
 
     describe "when the title has changed" do
@@ -52,29 +52,29 @@ RSpec.describe RefreshFeedWorker, type: :worker do
 
     describe "when an item's content has changed" do
       it "updates the item" do
-        FactoryBot.create(:item, feed: feed, guid: items.first.guid)
+        FactoryBot.create(:item, feed: feed, guid: entries.first.entry_id)
 
         expect do
           run!
         end.to change(feed.reload.items, :count).by(0)
 
         item = feed.items.first
-        expect(item.guid).to eql(items.first.guid)
-        expect(item.title).to eql(items.first.title)
-        expect(item.url).to eql(items.first.url)
-        expect(item.published_at.to_i).to eql(items.first.published_at.to_i)
+        expect(item.guid).to eql(entries.first.entry_id)
+        expect(item.title).to eql(entries.first.title)
+        expect(item.url).to eql(entries.first.url)
+        expect(item.published_at.to_i).to eql(entries.first.published.to_i)
       end
     end
   end
 
   describe "when loading the feed failed" do
     before do
-      expect(FeedLoader).to receive(:new).with(feed.url).and_raise("Error")
+      expect(FeedLoader).to receive(:new).with(feed.url).and_raise(Excon::Error.new)
     end
 
     it "updates the feed to the specified error" do
       run!
-      expect(feed.reload.error).to eql("Error")
+      expect(feed.reload.error).to eql("Excon::Error")
     end
   end
 
