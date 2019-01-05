@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     @feeds = current_user.feeds
     @stories = current_user.stories.
-      where("item.feed_id = ?", params[:id]).
+      where("items.feed_id = ?", params[:id]).
       order("items.published_at DESC").
       includes(item: :feed)
   end
