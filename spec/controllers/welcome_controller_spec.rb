@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe WelcomeController, type: :controller do
+  render_views
+
   describe "index" do
+    let(:story) { FactoryBot.create(:story) }
+    let(:user)  { story.user }
+
     describe "when logged in" do
       before do
-        sign_in FactoryBot.create(:user)
+        sign_in user
       end
 
       it "renders the template" do

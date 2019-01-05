@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe FeedsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  render_views
+  let(:story) { FactoryBot.create(:story) }
+  let(:user)  { story.user }
 
   before do
     sign_in user
   end
 
   describe "show" do
-    let(:feed) { FactoryBot.create(:feed) }
+    let(:feed) { story.feed }
 
     it "renders the template" do
       get :show, params: { id: feed.id }
