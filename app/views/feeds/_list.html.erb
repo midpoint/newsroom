@@ -1,7 +1,9 @@
-<div class="list-group">
+<div class="list-group stories">
   <% stories.each do |story| %>
     <%= link_to story.url,
-      class: "list-group-item list-group-item-action" do %>
+      "data-story": story.id,
+      target: "_blank",
+      class: "list-group-item list-group-item-action #{story.read? ? "" : "unread"}" do %>
       <%= story.feed.title %> &bullet; <%= story.title %>
     <% end %>
   <% end %>

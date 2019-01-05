@@ -11,5 +11,12 @@ Rails.application.routes.draw do
   end
 
   resources :feeds, only: [:show, :new, :create]
+
+  resources :stories, only: [] do
+    member do
+      post :read
+    end
+  end
+
   root 'welcome#index'
 end

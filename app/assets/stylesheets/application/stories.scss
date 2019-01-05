@@ -1,0 +1,7 @@
+.list-group.stories {
+  [data-story] {
+    &.unread {
+      font-weight: bold;
+    }
+  }
+}
