@@ -10,6 +10,12 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       title: Faker::DrWho.quote,
       url: Faker::Internet.url,
       published: DateTime.now
+    ),
+    OpenStruct.new(
+      entry_id: SecureRandom.uuid,
+      title: Faker::DrWho.quote,
+      url: Faker::Internet.url,
+      published: DateTime.now
     )
   ] }
 
@@ -31,7 +37,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
     it "adds new items" do
       expect do
         run!
-      end.to change(feed.reload.items, :count).from(0).to(1)
+      end.to change(feed.reload.items, :count).from(0).to(2)
 
       item = feed.items.first
       expect(item.guid).to eql(entries.first.entry_id)
@@ -50,7 +56,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       it "create a story for the user" do
         expect do
           run!
-        end.to change { user.stories.reload.count }.from(0).to(1)
+        end.to change { user.stories.reload.count }.from(0).to(2)
         expect(user.stories.first.item).to eql(feed.items.first)
       end
 
@@ -79,7 +85,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
 
         expect do
           run!
-        end.to change(feed.reload.items, :count).by(0)
+        end.to change(feed.reload.items, :count).by(1)
 
         item = feed.items.first
         expect(item.guid).to eql(entries.first.entry_id)

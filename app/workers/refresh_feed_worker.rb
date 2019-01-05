@@ -20,7 +20,7 @@ class RefreshFeedWorker
         i.save!
 
         feed.users.each do |user|
-          user.stories.first_or_create!(item_id: i.id)
+          user.stories.where(item_id: i.id).first_or_create!
         end
       end
     end
