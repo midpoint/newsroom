@@ -18,6 +18,10 @@ class RefreshFeedWorker
         i.url = item.url
         i.published_at = item.published
         i.save!
+
+        feed.users.each do |user|
+          user.stories.first_or_create!(item_id: i.id)
+        end
       end
     end
   rescue Excon::Error, Feedjira::NoParserAvailable => e

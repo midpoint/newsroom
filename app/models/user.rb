@@ -3,7 +3,7 @@ class User < ApplicationRecord
     :omniauthable, omniauth_providers: %i[github]
 
   has_and_belongs_to_many :feeds
-  has_many :items, through: :feeds
+  has_many :stories
 
   validates :username, presence: true
   validates :email, presence: true

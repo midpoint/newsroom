@@ -1,8 +1,8 @@
 class WelcomeController < ApplicationController
   def index
     @feeds = current_user.feeds
-    @items = current_user.items.
-      order(published_at: :desc).
-      includes(:feed)
+    @stories = current_user.stories.
+      order("items.published_at DESC").
+      includes(item: :feed)
   end
 end

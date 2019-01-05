@@ -40,6 +40,29 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       expect(item.published_at.to_i).to eql(entries.first.published.to_i)
     end
 
+    describe "stories" do
+      let(:user) { FactoryBot.create(:user) }
+
+      before do
+        user.feeds << feed
+      end
+
+      it "create a story for the user" do
+        expect do
+          run!
+        end.to change { user.stories.reload.count }.from(0).to(1)
+        expect(user.stories.first.item).to eql(feed.items.first)
+      end
+
+      it "handles duplicate stories" do
+        run!
+
+        expect do
+          run!
+        end.to change(user.stories.reload, :count).by(0)
+      end
+    end
+
     describe "when the title has changed" do
       let(:title) { Faker::StarWars.quote }
 
