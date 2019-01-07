@@ -2,43 +2,38 @@ source 'https://rubygems.org'
 
 ruby '2.6.0'
 
-gem 'rails', '~> 5.2.2'
-gem 'puma', '~> 3.11'
+gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootstrap', '~> 4.1.3'
+gem 'devise'
+gem 'excon'
+gem 'feathericon-sass'
+gem "feedjira", github: "feedjira/feedjira"
+gem 'jbuilder', '~> 2.5'
+gem 'omniauth-github'
 gem 'pg'
+gem 'puma', '~> 3.11'
+gem 'rails', '~> 5.2.2'
+gem 'sass-rails', '~> 5.0'
+gem "sentry-raven"
 gem 'sidekiq'
 gem "sidekiq-cron"
 gem 'sidekiq-unique-jobs'
-gem 'excon'
-gem "sentry-raven"
-gem "feedjira", github: "feedjira/feedjira"
-
-gem 'devise'
-gem 'omniauth-github'
-
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks', '~> 5'
-gem 'feathericon-sass'
-
 gem 'sprockets-rails', '~> 3.2.1'
-gem 'bootstrap', '~> 4.1.3'
-
-gem 'jbuilder', '~> 2.5'
-
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
-  gem 'bullet'
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
+
 end
 
 group :test do
