@@ -9,6 +9,7 @@ gem 'excon'
 gem 'feathericon-sass'
 gem "feedjira", github: "feedjira/feedjira"
 gem 'jbuilder', '~> 2.5'
+gem 'kaminari'
 gem 'omniauth-github'
 gem 'pg'
 gem 'puma', '~> 3.11'

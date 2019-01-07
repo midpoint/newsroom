@@ -1,4 +1,6 @@
 .list-group.stories {
+  margin-bottom: 20px;
+
   [data-story] {
     &.unread {
       font-weight: bold;
