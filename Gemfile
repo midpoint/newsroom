@@ -18,6 +18,7 @@ gem 'omniauth-github'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
+gem 'feathericon-sass'
 
 gem 'sprockets-rails', '~> 3.2.1'
 gem 'bootstrap', '~> 4.1.3'

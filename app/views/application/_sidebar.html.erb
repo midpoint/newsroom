@@ -1,10 +1,25 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
+      <li class="nav-item">
+        <%= link_to root_url, class: "nav-link" do %>
+          <i class="fe fe-home"></i>
+          Inbox
+        <% end %>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Feeds</span>
+      <%= link_to new_feed_url, class: "d-flex align-items-center text-muted" do %>
+        <i class="fe fe-plus"></i>
+      <% end %>
+    </h6>
+    <ul class="nav flex-column mb-2">
       <% feeds.each do |feed| %>
         <li class="nav-item">
           <%= link_to feed, class: "nav-link" do %>
-            <span data-feather="home"></span>
+            <i class="fe fe-comment"></i>
             <%= feed_title(feed) %>
           <% end %>
         </li>
