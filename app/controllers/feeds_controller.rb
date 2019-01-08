@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FeedsController < ApplicationController
   ENTRIES_PER_PAGE = 20
 
@@ -5,10 +7,10 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
     @feeds = current_user.feeds
     @stories = current_user.stories.
-      where("items.feed_id = ?", params[:id]).
-      order("items.published_at DESC").
-      includes(item: :feed).
-      page((params[:page] || 1).to_i).per(ENTRIES_PER_PAGE)
+               where("items.feed_id = ?", params[:id]).
+               order("items.published_at DESC").
+               includes(item: :feed).
+               page((params[:page] || 1).to_i).per(ENTRIES_PER_PAGE)
   end
 
   def new

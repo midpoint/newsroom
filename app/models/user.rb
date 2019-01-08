@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   devise :rememberable,
-    :omniauthable, omniauth_providers: %i[github]
+    :omniauthable, omniauth_providers: [:github]
 
   has_and_belongs_to_many :feeds
   has_many :stories

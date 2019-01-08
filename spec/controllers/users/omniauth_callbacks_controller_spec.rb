@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
@@ -14,7 +16,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
         "uid" => github_id,
         "info" => {
           "email"    => email,
-          "nickname" => username,
+          "nickname" => username
         },
         "credentials" => {
           "token" => github_token
