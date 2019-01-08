@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq-cron'
 
 Sidekiq::Cron::Job.load_from_array [

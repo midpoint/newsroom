@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RefreshFeedWorker
   include Sidekiq::Worker
   sidekiq_options unique: :until_and_while_executing

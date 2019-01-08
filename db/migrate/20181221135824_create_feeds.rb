@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFeeds < ActiveRecord::Migration[5.2]
   def change
     create_table :feeds do |t|
@@ -10,6 +12,6 @@ class CreateFeeds < ActiveRecord::Migration[5.2]
 
     create_join_table :users, :feeds do |t|
     t.index [:user_id, :feed_id]
-  end
+    end
   end
 end

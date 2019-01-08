@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FeedHelper
 
   def feed_title(feed)
