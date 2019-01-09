@@ -22,7 +22,6 @@ class FaviconLoader
     get_data! URI::HTTP.build(host: host, path: "/favicon.ico").to_s
   end
 
-
   # Check "shortcut icon" tag
   def check_for_html_tag
     uri = URI::HTTP.build(host: host, path: "/")
@@ -30,14 +29,21 @@ class FaviconLoader
     doc = Nokogiri::HTML(res.body)
 
     doc.xpath('//link[@rel="icon"]').each do |tag|
-      taguri = URI.parse(tag["href"])
-      taguri.host = uri.host if taguri.host.blank?
-      taguri.scheme = "http" if taguri.scheme.blank?
-
-      return get_data!(taguri.to_s)
+      return get_data! make_link_absolute(tag["href"])
     end
 
     nil
+  end
+
+  def make_link_absolute(link)
+    uri = URI.parse(link)
+    if uri.host.blank?
+      uri.path = "/" + uri.path unless uri.path[0] == "/"
+      uri.host = host
+      uri.scheme = "http"
+    end
+
+    uri.to_s
   end
 
   def get_data!(uri)

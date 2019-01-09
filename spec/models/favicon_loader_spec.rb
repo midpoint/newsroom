@@ -71,4 +71,18 @@ RSpec.describe FaviconLoader, type: :model do
       expect(subject.data).to eql(Base64.encode64(file_fixture("favicon.ico").read))
     end
   end
+
+  describe "make link absolute" do
+    it "handle absolute links with the host" do
+      expect(subject.send(:make_link_absolute, "https://example.com/foobar")).to eql("https://example.com/foobar")
+    end
+
+    it "handle absolute links without the host" do
+      expect(subject.send(:make_link_absolute, "/foobar")).to eql("http://#{host}/foobar")
+    end
+
+    it "handles relative links" do
+      expect(subject.send(:make_link_absolute, "foobar")).to eql("http://#{host}/foobar")
+    end
+  end
 end
