@@ -31,7 +31,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
     end
 
     it "removes any error from the feed" do
-      feed.update_attribute(:error, "")
+      feed.update_attribute(:error, "some error")
       run!
       expect(feed.reload.error).to eql("")
     end
@@ -63,11 +63,14 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       end
 
       it "handles duplicate stories" do
-        run!
+        entries.each do |e|
+          i = FactoryBot.create(:item, feed: feed, guid: e.entry_id)
+          FactoryBot.create(:story, user: user, item: i)
+        end
 
         expect do
           run!
-        end.to change(user.stories.reload, :count).by(0)
+        end.to change { user.reload.stories.count }.by(0)
       end
     end
 
@@ -96,6 +99,36 @@ RSpec.describe RefreshFeedWorker, type: :worker do
         expect(item.published_at.to_i).to eql(entries.first.published.to_i)
       end
     end
+
+    describe "refresh the favicon" do
+
+      describe "when the favicon was never reloaded" do
+        let(:feed) { FactoryBot.create(:feed, favicon_reloaded_at: nil) }
+
+        it "reloads the favicon" do
+          expect(RefreshFeedFaviconWorker).to receive(:perform_async).with(feed.id) { true }
+          run!
+        end
+      end
+
+      describe "when the favicon was last reloaded over a week ago" do
+        let(:feed) { FactoryBot.create(:feed, favicon_reloaded_at: 2.weeks.ago) }
+
+        it "reloads the favicon" do
+          expect(RefreshFeedFaviconWorker).to receive(:perform_async).with(feed.id) { true }
+          run!
+        end
+      end
+
+      describe "when the favicon was reloaded recently" do
+        let(:feed) { FactoryBot.create(:feed, favicon_reloaded_at: 1.hour.ago) }
+
+        it "reloads the favicon" do
+          expect(RefreshFeedFaviconWorker).not_to receive(:perform_async)
+          run!
+        end
+      end
+    end
   end
 
   describe "when loading the feed failed" do
@@ -112,8 +145,6 @@ RSpec.describe RefreshFeedWorker, type: :worker do
   private
 
   def run!
-    Sidekiq::Testing.inline! do
-      described_class.perform_async(feed.id)
-    end
+    described_class.new.perform(feed.id)
   end
 end

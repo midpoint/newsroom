@@ -26,13 +26,17 @@ class RefreshFeedWorker
         end
       end
     end
+
+    if feed.favicon_reloaded_at.nil? || feed.favicon_reloaded_at < 1.week.ago
+      RefreshFeedFaviconWorker.perform_async(feed.id)
+    end
   rescue Excon::Error, Feedjira::NoParserAvailable => e
     feed.error = e
     feed.save!
   rescue StandardError => e
     feed.error = e
     feed.save!
-    raise
+    raise if Rails.env.test?
   end
 
   private

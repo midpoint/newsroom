@@ -6,7 +6,7 @@ class Item < ApplicationRecord
 
   validates :guid,
     presence: true,
-    uniqueness: true
+    uniqueness: { scope: :feed }
 
   validates :url,
     presence: true
