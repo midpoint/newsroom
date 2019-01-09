@@ -50,8 +50,7 @@ class FaviconLoader
     res = Excon.get(uri, expects: 200)
     Base64.encode64(res.body)
   rescue Excon::Error::Redirection => e
-    res = Excon.get(e.response[:headers]["Location"], expects: 200)
-    Base64.encode64(res.body)
+    get_data!(make_link_absolute(e.response[:headers]["Location"]))
   rescue Excon::Error
     nil
   end
