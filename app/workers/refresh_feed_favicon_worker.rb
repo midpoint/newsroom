@@ -33,6 +33,6 @@ class RefreshFeedFaviconWorker
   end
 
   def favicon
-    @data ||= FaviconLoader.new(host)
+    @favicon ||= FaviconLoader.new(host)
   end
 end

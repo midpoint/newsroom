@@ -1,20 +1,20 @@
-class FaviconLoader
-  attr_reader :host
+# frozen_string_literal: true
 
+class FaviconLoader
   def initialize(host)
     @host = host
   end
 
   def data
     load_data!
-    @data
+    @load_data
   end
 
   private
   attr_reader :host
 
   def load_data!
-    @data ||= check_for_html_tag || check_for_ico_file
+    @load_data ||= check_for_html_tag || check_for_ico_file
   end
 
   # Check /favicon.ico
