@@ -40,6 +40,24 @@ RSpec.describe FaviconLoader, type: :model do
       end
     end
 
+    describe "with a redirect" do
+      before do
+        Excon.stub(
+          { host: host, path: "/favicon.ico" },
+          { body: "", status: 301, headers: { "Location" => "http://#{host}/my_favicon.ico" } }
+        )
+
+        Excon.stub(
+          { host: host, path: "/my_favicon.ico" },
+          { body: file_fixture("favicon.ico").read, status: 200 }
+        )
+      end
+
+      it "returns the base64 data" do
+        expect(subject.data).to eql(Base64.encode64(file_fixture("favicon.ico").read))
+      end
+    end
+
     describe "with a missing favicon.ico" do
       before do
         Excon.stub(
