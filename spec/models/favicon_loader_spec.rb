@@ -90,6 +90,28 @@ RSpec.describe FaviconLoader, type: :model do
     end
   end
 
+  describe "with an home which redirects" do
+    before do
+      Excon.stub(
+        { host: host, path: "/" },
+        { body: "", status: 301, headers: { "Location" => "http://#{host}/home" } }
+      )
+      Excon.stub(
+        { host: host, path: "/home" },
+        { body: file_fixture("html/with_favicon.html").read, status: 200 }
+      )
+      Excon.stub(
+        { host: host, path: "/my_favicon.ico" },
+        { body: file_fixture("favicon.ico").read, status: 200 }
+      )
+    end
+
+
+    it "returns the base64 data" do
+      expect(subject.data).to eql(Base64.encode64(file_fixture("favicon.ico").read))
+    end
+  end
+
   describe "make link absolute" do
     it "handle absolute links with the host" do
       expect(subject.send(:make_link_absolute, "https://example.com/foobar")).to eql("https://example.com/foobar")
