@@ -27,7 +27,7 @@ describe FeedHelper do
 
     it "returns the specified favicon" do
       feed.favicon = "my favicon"
-      expect(helper.feed_favicon(feed)).to eql("<img class=\"favicon\" src=\"data:image/jpeg;base64,my favicon\" />")
+      expect(helper.feed_favicon(feed)).to eql("<img class=\"favicon\" src=\"data:image/vnd.microsoft.icon;base64,my favicon\" />")
     end
   end
 end

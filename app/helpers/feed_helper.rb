@@ -11,7 +11,7 @@ module FeedHelper
   end
 
   def feed_favicon(feed)
-    return image_tag("data:image/jpeg;base64,#{feed.favicon}", class: "favicon") unless feed.favicon.blank?
+    return image_tag("data:image/vnd.microsoft.icon;base64,#{feed.favicon}", class: "favicon") unless feed.favicon.blank?
 
     return content_tag(:i, "", class: "fe fe-feed")
   end
