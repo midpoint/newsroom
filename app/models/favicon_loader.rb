@@ -28,7 +28,7 @@ class FaviconLoader
     res = Excon.get(uri, expects: 200)
     doc = Nokogiri::HTML(res.body)
 
-    doc.xpath('//link[@rel="icon"]').each do |tag|
+    doc.css('link[rel*=icon]').each do |tag|
       return get_data! make_link_absolute(tag["href"])
     end
 
