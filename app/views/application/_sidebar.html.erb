@@ -19,7 +19,7 @@
       <% feeds.each do |feed| %>
         <li class="nav-item">
           <%= link_to feed, class: "nav-link" do %>
-            <i class="fe fe-comment"></i>
+            <%= feed_favicon(feed) %>
             <%= feed_title(feed) %>
           <% end %>
         </li>

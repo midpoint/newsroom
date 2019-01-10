@@ -9,4 +9,10 @@ module FeedHelper
     end
     return feed.title
   end
+
+  def feed_favicon(feed)
+    return image_tag("data:image/jpeg;base64,#{feed.favicon}", class: "favicon") unless feed.favicon.blank?
+
+    return content_tag(:i, "", class: "fe fe-feed")
+  end
 end
