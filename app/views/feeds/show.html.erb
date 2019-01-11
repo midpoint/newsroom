@@ -10,7 +10,7 @@
       <% if !@feed.error.blank? %>
         <div class="alert alert-danger">An error occured when loading this feed: <%= @feed.error %></div>
       <% end %>
-      <%= render "feeds/list", stories: @stories %>
+      <%= render "stories/list", stories: @stories %>
     </main>
   </div>
 </div>
