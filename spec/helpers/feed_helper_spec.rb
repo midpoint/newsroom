@@ -10,6 +10,10 @@ describe FeedHelper do
       expect(helper.feed_title(feed)).to eql(feed.title)
     end
 
+    it "returns a blank string for a nil feed" do
+      expect(helper.feed_title(nil)).to eql("")
+    end
+
     describe "when the feed has no title" do
       let(:feed) { FactoryBot.create(:feed, title: "") }
 
@@ -25,9 +29,14 @@ describe FeedHelper do
       expect(helper.feed_favicon(feed)).to eql("<i class=\"fe fe-feed\"></i>")
     end
 
+    it "returns the default favicon for a nil feed" do
+      expect(helper.feed_favicon(nil)).to eql("<i class=\"fe fe-feed\"></i>")
+    end
+
     it "returns the specified favicon" do
       feed.favicon = "my favicon"
       expect(helper.feed_favicon(feed)).to eql("<img class=\"favicon\" src=\"data:image/vnd.microsoft.icon;base64,my favicon\" />")
     end
+
   end
 end

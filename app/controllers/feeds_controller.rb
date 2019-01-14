@@ -18,11 +18,11 @@ class FeedsController < ApplicationController
   end
 
   def create
-    feed = Feed.where(url: feed_params[:url]).first_or_create
+    @feed = Feed.where(url: feed_params[:url]).first_or_create
 
-    if feed.persisted?
-      current_user.feeds << feed
-      RefreshFeedWorker.perform_async(feed.id)
+    if @feed.persisted?
+      current_user.feeds << @feed
+      RefreshFeedWorker.perform_async(@feed.id)
 
       redirect_to root_path
     else
