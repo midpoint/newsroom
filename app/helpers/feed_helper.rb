@@ -9,7 +9,8 @@ module FeedHelper
   end
 
   def feed_favicon(feed)
-    return content_tag(:i, "", class: "fe fe-feed") if feed.nil? || feed.favicon.blank?
+    return content_tag(:i, "", class: "fe fe-book") if feed.nil?
+    return content_tag(:i, "", class: "fe fe-feed") if feed.favicon.blank?
     return image_tag("data:image/vnd.microsoft.icon;base64,#{feed.favicon}", class: "favicon")
   end
 end

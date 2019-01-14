@@ -25,12 +25,12 @@ describe FeedHelper do
   end
 
   describe "#feed_favicon" do
-    it "returns the default favicon" do
+    it "returns the feed favicon" do
       expect(helper.feed_favicon(feed)).to eql("<i class=\"fe fe-feed\"></i>")
     end
 
-    it "returns the default favicon for a nil feed" do
-      expect(helper.feed_favicon(nil)).to eql("<i class=\"fe fe-feed\"></i>")
+    it "returns the book favicon for a nil feed" do
+      expect(helper.feed_favicon(nil)).to eql("<i class=\"fe fe-book\"></i>")
     end
 
     it "returns the specified favicon" do
