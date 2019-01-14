@@ -7,7 +7,7 @@ class ItemLoader
   end
 
   def title
-    data.css('title')
+    data.css('title').text
   end
 
   private
@@ -18,5 +18,8 @@ class ItemLoader
 
   def content
     @content ||= Excon.get(@url, expects: 200).body
+  rescue Excon::Error::Redirection => e
+    @url = e.response[:headers]["Location"]
+    content
   end
 end
