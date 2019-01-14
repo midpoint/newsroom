@@ -23,6 +23,8 @@ RSpec.describe ItemsController, type: :controller do
     let(:url)   { Faker::Internet.url }
 
     it "creates a new item" do
+      expect(SyncItemWorker).to receive(:perform_async)
+
       expect do
         post :create, params: { item: { url: url } }
       end.to change(Item, :count).by(1)
@@ -32,6 +34,8 @@ RSpec.describe ItemsController, type: :controller do
     end
 
     it "subscribes to an existing item" do
+      expect(SyncItemWorker).to receive(:perform_async).with(item.id)
+
       expect do
         post :create, params: { item: { url: item.url } }
       end.to change(Item, :count).by(0)
@@ -41,6 +45,8 @@ RSpec.describe ItemsController, type: :controller do
     end
 
     it "rerenders the new page" do
+      expect(SyncItemWorker).not_to receive(:perform_async)
+
       post :create, params: { item: { url: "" } }
       expect(response).to have_http_status(:ok)
     end

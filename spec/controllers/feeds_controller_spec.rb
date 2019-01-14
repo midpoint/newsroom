@@ -56,6 +56,8 @@ RSpec.describe FeedsController, type: :controller do
     end
 
     it "rerenders the new page" do
+      expect(RefreshFeedWorker).not_to receive(:perform_async)
+
       post :create, params: { feed: { url: "" } }
       expect(response).to have_http_status(:ok)
     end
