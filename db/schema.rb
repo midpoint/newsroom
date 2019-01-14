@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_09_152146) do
+ActiveRecord::Schema.define(version: 2019_01_14_081035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,13 +34,12 @@ ActiveRecord::Schema.define(version: 2019_01_09_152146) do
 
   create_table "items", force: :cascade do |t|
     t.integer "feed_id"
-    t.string "guid", null: false
     t.string "title"
     t.string "url", null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guid", "feed_id"], name: "index_items_on_guid_and_feed_id", unique: true
+    t.index ["url", "feed_id"], name: "index_items_on_url_and_feed_id", unique: true
   end
 
   create_table "stories", force: :cascade do |t|

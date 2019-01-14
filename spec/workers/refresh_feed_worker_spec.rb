@@ -42,7 +42,6 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       end.to change(feed.reload.items, :count).from(0).to(2)
 
       item = feed.items.first
-      expect(item.guid).to eql(entries.first.entry_id)
       expect(item.title).to eql(entries.first.title)
       expect(item.url).to eql(entries.first.url)
       expect(item.published_at.to_i).to eql(entries.first.published.to_i)
@@ -64,7 +63,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
 
       it "handles duplicate stories" do
         entries.each do |e|
-          i = FactoryBot.create(:item, feed: feed, guid: e.entry_id)
+          i = FactoryBot.create(:item, feed: feed, url: e.url)
           FactoryBot.create(:story, user: user, item: i)
         end
 
@@ -86,14 +85,13 @@ RSpec.describe RefreshFeedWorker, type: :worker do
 
     describe "when an item's content has changed" do
       it "updates the item" do
-        FactoryBot.create(:item, feed: feed, guid: entries.first.entry_id)
+        FactoryBot.create(:item, feed: feed, url: entries.first.url)
 
         expect do
           run!
         end.to change(feed.reload.items, :count).by(1)
 
         item = feed.items.first
-        expect(item.guid).to eql(entries.first.entry_id)
         expect(item.title).to eql(entries.first.title)
         expect(item.url).to eql(entries.first.url)
         expect(item.published_at.to_i).to eql(entries.first.published.to_i)

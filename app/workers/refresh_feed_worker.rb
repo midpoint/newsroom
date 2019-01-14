@@ -15,7 +15,7 @@ class RefreshFeedWorker
       feed.save!
 
       data.entries.each do |item|
-        i = feed.items.where(guid: item.entry_id || item.url).first_or_initialize
+        i = feed.items.where(url: item.url).first_or_initialize
         i.title = item.title
         i.url = item.url
         i.published_at = item.published
