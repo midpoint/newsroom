@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Item < ApplicationRecord
-  belongs_to :feed
+  belongs_to :feed,
+    optional: true
 
   validates :url,
     presence: true,
