@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).on('turbolinks:load', function() {
 
   jQuery("[data-story]").on("click", function(){
     story = jQuery(this);
