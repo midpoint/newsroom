@@ -7,4 +7,7 @@ class Item < ApplicationRecord
   validates :url,
     presence: true,
     uniqueness: { scope: :feed }
+
+  validates :published_at,
+    presence: true
 end
