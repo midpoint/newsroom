@@ -44,6 +44,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rspec-json_expectations'
   gem 'rspec-rails'
   gem 'rspec-sidekiq'
 end

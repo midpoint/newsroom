@@ -33,6 +33,23 @@ RSpec.describe ItemsController, type: :controller do
       expect(user.stories.map(&:url)).to include(url)
     end
 
+    it "creates a new item in json" do
+      expect(SyncItemWorker).to receive(:perform_async)
+
+      expect do
+        post :create, params: { item: { url: url } }, format: :json
+      end.to change(Item, :count).by(1)
+
+      json = JSON.parse(response.body)
+      item = Item.last
+      expect(json).to include_json(
+        id: item.id,
+        feed_id: nil,
+        title: nil,
+        url: item.url
+      )
+    end
+
     it "subscribes to an existing item" do
       expect(SyncItemWorker).to receive(:perform_async).with(item.id)
 
