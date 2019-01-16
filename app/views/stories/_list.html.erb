@@ -3,9 +3,14 @@
     <%= link_to story.url,
       "data-story": story.id,
       target: "_blank",
-      class: "list-group-item list-group-item-action #{story.read? ? "" : "unread"}" do %>
-      <%= feed_favicon(story.feed) %>
-      <%= story.title %>
+      class: "list-group-item list-group-item-action d-flex #{story.read? ? "" : "unread"}" do %>
+      <div>
+        <%= feed_favicon(story.feed) %>
+        <%= story.title %>
+      </div>
+      <div class="ml-auto" title="<%= l story.published_at, format: :short %>">
+        <%= time_ago_in_words(story.published_at) %> ago
+      </div>
     <% end %>
   <% end %>
 </div>
