@@ -16,6 +16,7 @@ gem 'omniauth-github'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
+gem "responders"
 gem 'sass-rails', '~> 5.0'
 gem "sentry-raven"
 gem 'sidekiq'

@@ -12,11 +12,9 @@ class ItemsController < ApplicationController
     if @item.persisted?
       SyncItemWorker.perform_async(@item.id)
       current_user.stories.where(item_id: @item.id).first_or_create!
-
-      redirect_to root_path
-    else
-      render :new
     end
+
+    respond_with @item, location: -> { root_path }
   end
 
   private

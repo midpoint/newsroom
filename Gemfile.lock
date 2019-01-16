@@ -320,6 +320,7 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rails (~> 5.2.2)
+  responders
   rspec-rails
   rspec-sidekiq
   rubocop
