@@ -7,7 +7,9 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.where(url: item_params[:url]).first_or_create
+    @item = Item.where(url: item_params[:url]).first_or_create do |i|
+      i.published_at = Time.now
+    end
 
     if @item.persisted?
       SyncItemWorker.perform_async(@item.id)
