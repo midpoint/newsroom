@@ -6,7 +6,7 @@
       class: "list-group-item list-group-item-action d-flex #{story.read? ? "" : "unread"}" do %>
       <div>
         <%= feed_favicon(story.feed) %>
-        <%= story.title %>
+        <%= story.title.blank? ? story.url : story.title %>
       </div>
       <div class="ml-auto" title="<%= l story.published_at, format: :short %>">
         <%= time_ago_in_words(story.published_at) %> ago
