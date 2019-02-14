@@ -3,6 +3,8 @@
 class Item < ApplicationRecord
   belongs_to :feed,
     optional: true
+  has_many :stories,
+    dependent: :destroy
 
   validates :url,
     presence: true,
