@@ -17,7 +17,7 @@
     </h6>
     <ul class="nav flex-column mb-2">
       <% feeds.each do |feed| %>
-        <li class="nav-item">
+        <li class="nav-item <%= feed.error? ? "alert-danger" : "" %>">
           <%= link_to feed, class: "nav-link" do %>
             <%= feed_favicon(feed) %>
             <%= feed_title(feed) %>

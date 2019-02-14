@@ -7,4 +7,8 @@ class Feed < ApplicationRecord
   validates :url,
     presence: true,
     uniqueness: true
+
+  def error?
+    !error.blank?
+  end
 end
