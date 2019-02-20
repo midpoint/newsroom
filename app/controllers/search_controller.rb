@@ -5,9 +5,8 @@ class SearchController < ApplicationController
 
   def index
     @feeds = current_user.feeds
-    @stories = current_user.stories.
-               order("items.published_at DESC").
-               includes(item: :feed).
+    @stories = Search.new(query: params[:q], user: current_user).
+               run.
                page((params[:page] || 1).to_i).per(ENTRIES_PER_PAGE)
   end
 end
