@@ -2,6 +2,10 @@
   margin-bottom: 20px;
 
   [data-story] {
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+
     &.unread {
       font-weight: bold;
     }
