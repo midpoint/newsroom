@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WelcomeController, type: :controller do
+RSpec.describe SearchController, type: :controller do
   render_views
 
   describe "index" do

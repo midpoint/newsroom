@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  get '/search' => 'search#index'
+
   resources :feeds, only: [:show, :new, :create]
   resources :items, only: [:new, :create]
 
@@ -21,5 +23,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'welcome#index'
+  root to: redirect('/search')
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WelcomeController < ApplicationController
+class SearchController < ApplicationController
   ENTRIES_PER_PAGE = 20
 
   def index
