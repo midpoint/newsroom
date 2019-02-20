@@ -14,8 +14,13 @@ RSpec.describe SearchController, type: :controller do
         sign_in user
       end
 
-      it "renders the template" do
+      it "redirects to unread only" do
         get :index
+        expect(response).to redirect_to(search_path(q: 'read:false'))
+      end
+
+      it "renders the template" do
+        get :index, params: {q: 'read:false'}
         expect(response).to have_http_status(:ok)
       end
     end
