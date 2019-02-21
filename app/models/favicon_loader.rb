@@ -33,8 +33,6 @@ class FaviconLoader
     end
 
     nil
-  rescue Excon::Error::Redirection => e
-    check_for_html_tag make_link_absolute(e.response[:headers]["Location"])
   rescue Excon::Error
     nil
   end
@@ -53,8 +51,6 @@ class FaviconLoader
   def get_data!(uri)
     res = Excon.get(uri, expects: 200)
     Base64.encode64(res.body)
-  rescue Excon::Error::Redirection => e
-    get_data! make_link_absolute(e.response[:headers]["Location"])
   rescue Excon::Error
     nil
   end

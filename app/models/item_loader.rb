@@ -18,8 +18,5 @@ class ItemLoader
 
   def content
     @content ||= Excon.get(@url, expects: 200).body
-  rescue Excon::Error::Redirection => e
-    @url = e.response[:headers]["Location"]
-    content
   end
 end
