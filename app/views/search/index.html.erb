@@ -2,8 +2,14 @@
   <div class="row">
     <%= render "sidebar", feeds: @feeds %>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-0">
-      <%= render "stories/list", stories: @stories %>
+    <main role="main" class="search col-md-9 ml-sm-auto col-lg-10 px-0">
+      <% if @stories.length > 0 %>
+        <%= render "stories/list", stories: @stories %>
+      <% else %>
+        <div class="text-center inbox-zero">
+          <h2>No Stories Found!</h2>
+        </div>
+      <% end %>
     </main>
   </div>
 </div>
