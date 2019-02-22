@@ -11,6 +11,7 @@ class Search
   def run
     res = user.stories
     res = res.where(read: query[:read]) if query.key?(:read)
+    res = res.where("items.feed_id = ?", query[:feed]) if query.key?(:feed)
 
     include!(sort!(res))
   end
