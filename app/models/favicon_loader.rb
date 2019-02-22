@@ -25,7 +25,7 @@ class FaviconLoader
   # Check "shortcut icon" tag
   def check_for_html_tag(uri = nil)
     uri = URI::HTTP.build(host: host, path: "/").to_s if uri.nil?
-    res = Excon.get(uri, expects: 200)
+    res = Request.get(uri)
     doc = Nokogiri::HTML(res.body)
 
     doc.css('link[rel*=icon]').each do |tag|
@@ -49,7 +49,7 @@ class FaviconLoader
   end
 
   def get_data!(uri)
-    res = Excon.get(uri, expects: 200)
+    res = Request.get(uri)
     Base64.encode64(res.body)
   rescue Excon::Error
     nil

@@ -15,6 +15,6 @@ class FeedLoader
   end
 
   def content
-    @content ||= Excon.get(@url, expects: 200).body
+    @content ||= Request.get(@url).body
   end
 end
