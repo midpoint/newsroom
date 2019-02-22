@@ -3,12 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
-  let(:github_id)    { SecureRandom.random_number }
-  let(:username)     { "johndoe" }
-  let(:email)        { "johndoe@example.com" }
-  let(:github_token) { SecureRandom.uuid }
+  let(:github_id)      { SecureRandom.random_number }
+  let(:username)       { "johndoe" }
+  let(:email)          { "johndoe@example.com" }
+  let(:github_token)   { SecureRandom.uuid }
+  let(:octokit_client) { double(:octokit_client, organization_member?: true) }
 
   describe "when login is successful" do
+    before do
+      allow(Octokit::Client).to receive(:new).
+        with(access_token: github_token).
+        and_return(octokit_client)
+    end
+
     before do
       request.env["devise.mapping"] = Devise.mappings[:user]
       request.env["omniauth.auth"] = OmniAuth::AuthHash.new({
@@ -22,6 +29,21 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
           "token" => github_token
         }
       })
+    end
+
+    describe "when not a member of the organization" do
+      let(:octokit_client) { double(:octokit_client, organization_member?: false) }
+
+      before do
+        get :github
+      end
+
+      it "should not create the user" do
+        expect(User.where(github_id: github_id).count).to eql(0)
+      end
+
+      it { should_not be_user_signed_in }
+      it { expect(response).to redirect_to root_path }
     end
 
     describe "first login" do
