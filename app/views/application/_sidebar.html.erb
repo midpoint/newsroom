@@ -18,7 +18,7 @@
     <ul class="nav flex-column mb-2">
       <% feeds.each do |feed| %>
         <li class="nav-item <%= feed.error? ? "alert-danger" : "" %>">
-          <%= link_to feed, class: "nav-link" do %>
+          <%= link_to search_path(q: "feed:#{feed.id}"), class: "nav-link" do %>
             <%= feed_favicon(feed) %>
             <%= feed_title(feed) %>
           <% end %>
