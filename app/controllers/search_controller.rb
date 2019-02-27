@@ -5,15 +5,13 @@ class SearchController < ApplicationController
 
   def index
     if params[:q].blank?
-      return redirect_to(
-        action: :index,
-        q: 'read:false'
-      )
+      return redirect_to(q: 'read:false')
     end
 
     @feeds = current_user.feeds
     @stories = Search.new(query: params[:q], user: current_user).
                run.
                page((params[:page] || 1).to_i).per(ENTRIES_PER_PAGE)
+    respond_with @stories
   end
 end

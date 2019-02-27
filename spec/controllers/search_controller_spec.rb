@@ -23,6 +23,11 @@ RSpec.describe SearchController, type: :controller do
         get :index, params: {q: 'read:false'}
         expect(response).to have_http_status(:ok)
       end
+
+      it "renders stories in json" do
+        get :index, params: {q: 'read:false'}, format: :json
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     describe "when logged out" do
