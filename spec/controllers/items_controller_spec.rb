@@ -40,6 +40,7 @@ RSpec.describe ItemsController, type: :controller do
         expect do
           post :create, params: { item: { url: url } }, format: :json
         end.to change(Item, :count).by(1)
+        expect(response).to have_http_status(:created)
 
         json = JSON.parse(response.body)
         item = Item.last
