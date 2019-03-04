@@ -16,6 +16,19 @@ RSpec.describe Search, type: :model do
     expect(d.count).to eql(2)
   end
 
+  describe "with params and search" do
+    let(:query) { "read:false #{stories.first.title.first}" }
+
+    before do
+      FactoryBot.create(:story, user: user, read: false)
+    end
+
+    it "succeeds" do
+      d = subject.run
+      expect(d.count).to eql(1)
+    end
+  end
+
   describe "read" do
     describe "fetching unread stories" do
       let(:query) { "read:false" }
@@ -47,5 +60,4 @@ RSpec.describe Search, type: :model do
       expect(d.first.feed).to eql(stories.first.feed)
     end
   end
-
 end

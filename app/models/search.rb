@@ -12,6 +12,7 @@ class Search
     res = user.stories
     res = res.where(read: query[:read]) if query.key?(:read)
     res = res.where("items.feed_id = ?", query[:feed]) if query.key?(:feed)
+    res = res.where("items.title LIKE ?", "%#{query[:search]}%") unless query[:search].blank?
 
     include!(sort!(res))
   end
@@ -28,9 +29,14 @@ class Search
 
   def parse_query!(query)
     return {} if query.blank?
+    search = []
 
-    query.split(" ").map do |d|
+    params = query.split(" ").map do |d|
       next if d.blank?
+      if !d.match?(/:/)
+        search << d
+        next
+      end
 
       k = d.split(":")
       k[0] = k[0].to_sym
@@ -42,6 +48,8 @@ class Search
              end
 
       k
-    end.to_h
+    end.compact.to_h
+
+    params.merge(search: search.join(" "))
   end
 end
