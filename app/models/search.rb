@@ -12,7 +12,7 @@ class Search
     res = user.stories
     res = res.where(read: query[:read]) if query.key?(:read)
     res = res.where("items.feed_id = ?", query[:feed]) if query.key?(:feed)
-    res = res.where("items.title LIKE ?", "%#{query[:search]}%") unless query[:search].blank?
+    res = res.where("items.title ILIKE ?", "%#{query[:search]}%") unless query[:search].blank?
 
     include!(sort!(res))
   end

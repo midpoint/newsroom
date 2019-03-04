@@ -17,11 +17,11 @@ RSpec.describe Search, type: :model do
   end
 
   describe "with params and search" do
-    let(:query) { "read:false #{stories.first.title.first}" }
-
-    before do
+    let(:query) { "read:false #{stories.first.title}" }
+    let!(:stories) { [
+      FactoryBot.create(:story, user: user, read: false),
       FactoryBot.create(:story, user: user, read: false)
-    end
+    ] }
 
     it "succeeds" do
       d = subject.run
