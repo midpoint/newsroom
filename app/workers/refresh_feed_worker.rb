@@ -22,7 +22,11 @@ class RefreshFeedWorker
         i.save!
 
         feed.subscriptions.each do |sub|
-          sub.user.stories.where(item_id: i.id).first_or_create!
+          story = sub.user.stories.where(item_id: i.id).first_or_create!
+
+          sub.tags.each do |tag|
+            story.tags << tag
+          end
         end
       end
     end
