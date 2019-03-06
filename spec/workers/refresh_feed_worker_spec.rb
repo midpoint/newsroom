@@ -51,7 +51,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       let(:user) { FactoryBot.create(:user) }
 
       before do
-        user.feeds << feed
+        Subscription.create!(user: user, feed: feed)
       end
 
       it "create a story for the user" do

@@ -21,8 +21,8 @@ class RefreshFeedWorker
         i.published_at = item.published
         i.save!
 
-        feed.users.each do |user|
-          user.stories.where(item_id: i.id).first_or_create!
+        feed.subscriptions.each do |sub|
+          sub.user.stories.where(item_id: i.id).first_or_create!
         end
       end
     end

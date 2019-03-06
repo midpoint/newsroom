@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :rememberable,
     :omniauthable, omniauth_providers: [:github]
 
-  has_and_belongs_to_many :feeds
+  has_many :subscriptions
   has_many :stories
 
   validates :username, presence: true

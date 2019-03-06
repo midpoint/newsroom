@@ -9,6 +9,10 @@ RSpec.describe SearchController, type: :controller do
     let(:story) { FactoryBot.create(:story) }
     let(:user)  { story.user }
 
+    before do
+      FactoryBot.create(:subscription, user: user)
+    end
+
     describe "when logged in" do
       before do
         sign_in user

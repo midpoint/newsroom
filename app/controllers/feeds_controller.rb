@@ -9,7 +9,7 @@ class FeedsController < ApplicationController
     @feed = Feed.where(url: feed_params[:url]).first_or_create
 
     if @feed.persisted?
-      current_user.feeds << @feed
+      Subscription.create!(user: current_user, feed: @feed)
       RefreshFeedWorker.perform_async(@feed.id)
     end
 

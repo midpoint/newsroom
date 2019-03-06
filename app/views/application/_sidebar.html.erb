@@ -16,11 +16,11 @@
       <% end %>
     </h6>
     <ul class="nav flex-column mb-2">
-      <% feeds.each do |feed| %>
-        <li class="nav-item <%= feed.error? ? "alert-danger" : "" %>">
-          <%= link_to search_path(q: "feed:#{feed.id}"), class: "nav-link" do %>
-            <%= feed_favicon(feed) %>
-            <%= feed_title(feed) %>
+      <% subscriptions.each do |subscription| %>
+        <li class="nav-item <%= subscription.feed.error? ? "alert-danger" : "" %>">
+          <%= link_to search_path(q: "feed:#{subscription.feed.id}"), class: "nav-link" do %>
+            <%= feed_favicon(subscription.feed) %>
+            <%= feed_title(subscription.feed) %>
           <% end %>
         </li>
       <% end %>

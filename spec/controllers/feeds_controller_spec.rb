@@ -30,8 +30,8 @@ RSpec.describe FeedsController, type: :controller do
       end.to change(Feed, :count).by(1)
 
       expect(response).to redirect_to(root_path)
-      expect(user.feeds.length).to eq(1)
-      expect(user.feeds.map(&:url)).to include(url)
+      expect(user.subscriptions.length).to eq(1)
+      expect(user.subscriptions.map(&:url)).to include(url)
     end
 
     it "subscribes to an existing feed" do
@@ -42,8 +42,8 @@ RSpec.describe FeedsController, type: :controller do
       end.to change(Feed, :count).by(0)
 
       expect(response).to redirect_to(root_path)
-      expect(user.feeds.length).to eq(1)
-      expect(user.feeds.map(&:url)).to include(feed.url)
+      expect(user.subscriptions.length).to eq(1)
+      expect(user.subscriptions.map(&:url)).to include(feed.url)
     end
 
     it "rerenders the new page" do
