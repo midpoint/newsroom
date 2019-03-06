@@ -6,6 +6,6 @@ Sidekiq::Cron::Job.load_from_array [
   {
     'name'  => 'refresh all feeds',
     'class' => 'RefreshAllFeedsWorker',
-    'cron'  => '*/10 * * * *'
+    'cron'  => '0 * * * *'
   },
 ]
