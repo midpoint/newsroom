@@ -25,8 +25,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @auth_hash ||= request.env['omniauth.auth']
   end
 
+  def auth_token
+    @auth_token ||= auth_hash.credentials&.token
+  end
+
   def client
-    @client ||= Octokit::Client.new(access_token: auth_hash.credentials&.token)
+    @client ||= Octokit::Client.new(access_token: auth_token)
   end
 
   def find_user!
@@ -38,7 +42,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def authorize_access!
-    return true if organization_member?
+    return true if auth_hash && organization_member?
 
     flash[:error] = 'Access denied.'
     redirect_to root_path

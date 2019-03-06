@@ -9,6 +9,10 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:github_token)   { SecureRandom.uuid }
   let(:octokit_client) { double(:octokit_client, organization_member?: true) }
 
+  before do
+    request.env["devise.mapping"] = Devise.mappings[:user]
+  end
+
   describe "when login is successful" do
     before do
       allow(Octokit::Client).to receive(:new).
@@ -17,7 +21,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     before do
-      request.env["devise.mapping"] = Devise.mappings[:user]
       request.env["omniauth.auth"] = OmniAuth::AuthHash.new({
         "provider" => "github",
         "uid" => github_id,
@@ -83,12 +86,24 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   describe "when login doesn't have the appropriate data" do
     before do
-      request.env["devise.mapping"] = Devise.mappings[:user]
       request.env["omniauth.auth"] = OmniAuth::AuthHash.new({
         "provider" => "github"
       })
     end
 
+    it "doesn't persist the user" do
+      expect do
+        get :github
+      end.to change(User, :count).by(0)
+    end
+
+    it "should redirect back to root" do
+      get :github
+      expect(response).to redirect_to root_path
+    end
+  end
+
+  describe "when login doesn't have any data" do
     it "doesn't persist the user" do
       expect do
         get :github
