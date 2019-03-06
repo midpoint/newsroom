@@ -11,7 +11,7 @@ class CreateFeeds < ActiveRecord::Migration[5.2]
     add_index :feeds, :url, unique: true
 
     create_join_table :users, :feeds do |t|
-    t.index [:user_id, :feed_id]
+      t.index [:user_id, :feed_id]
     end
   end
 end
