@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+class FeedsUser < ActiveRecord::Base; end
+
 class CreateSubscriptions < ActiveRecord::Migration[5.2]
   def up
     create_table :subscriptions do |t|
@@ -11,10 +13,8 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
       t.index [:user_id, :feed_id], unique: true
     end
 
-    User.all.each do |user|
-      user.feeds.each do |feed|
-        Subscription.create!(user: user, feed: feed)
-      end
+    FeedsUser.all.each do |f|
+      Subscription.create!(user_id: f.user_id, feed_id: f.feed_id)
     end
 
     drop_table :feeds_users
@@ -26,7 +26,9 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
     end
 
     Subscription.all.each do |s|
-      s.user.feeds << s.feed
+      FeedsUser.create!(user_id: s.user_id, feed_id: s.feed_id)
     end
+
+    drop_table :subscriptions
   end
 end
