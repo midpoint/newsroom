@@ -14,7 +14,10 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
     end
 
     FeedsUser.all.each do |f|
-      Subscription.create!(user_id: f.user_id, feed_id: f.feed_id)
+      feed = Feed.find(f.feed_id) rescue nil
+      user = User.find(f.user_id) rescue nil
+      next if feed.nil? || user.nil?
+      Subscription.create!(user: user, feed: feed)
     end
 
     drop_table :feeds_users
