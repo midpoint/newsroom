@@ -8,4 +8,8 @@ class Story < ApplicationRecord
   delegate :title,        to: :item
   delegate :url,          to: :item
   delegate :published_at, to: :item
+
+  def read?
+    !read_at.nil?
+  end
 end

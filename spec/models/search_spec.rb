@@ -7,8 +7,8 @@ RSpec.describe Search, type: :model do
   let(:user) { FactoryBot.build(:user) }
   subject { described_class.new(query: query, user: user) }
   let!(:stories) { [
-    FactoryBot.create(:story, user: user, read: false),
-    FactoryBot.create(:story, user: user, read: true)
+    FactoryBot.create(:story, user: user),
+    FactoryBot.create(:story, user: user, read_at: Time.now)
   ] }
 
   it "succeeds with an empty query" do
@@ -19,8 +19,8 @@ RSpec.describe Search, type: :model do
   describe "with params and search" do
     let(:query) { "read:false #{stories.first.title}" }
     let!(:stories) { [
-      FactoryBot.create(:story, user: user, read: false),
-      FactoryBot.create(:story, user: user, read: false)
+      FactoryBot.create(:story, user: user),
+      FactoryBot.create(:story, user: user)
     ] }
 
     it "succeeds" do
@@ -36,7 +36,7 @@ RSpec.describe Search, type: :model do
       it "succeeds" do
         d = subject.run
         expect(d.count).to eql(1)
-        expect(d.first.read).to be(false)
+        expect(d.first).not_to be_read
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Search, type: :model do
       it "succeeds" do
         d = subject.run
         expect(d.count).to eql(1)
-        expect(d.first.read).to be(true)
+        expect(d.first).to be_read
       end
     end
   end
