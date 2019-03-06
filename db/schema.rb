@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_142506) do
     t.index ["url"], name: "index_feeds_on_url", unique: true
   end
 
-  create_table "feeds_tags", id: false, force: :cascade do |t|
-    t.bigint "feed_id", null: false
-    t.bigint "tag_id", null: false
-    t.index ["feed_id", "tag_id"], name: "index_feeds_tags_on_feed_id_and_tag_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.integer "feed_id"
     t.string "title"
@@ -63,6 +57,12 @@ ActiveRecord::Schema.define(version: 2019_03_06_142506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
+  end
+
+  create_table "subscriptions_tags", id: false, force: :cascade do |t|
+    t.bigint "subscription_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["subscription_id", "tag_id"], name: "index_subscriptions_tags_on_subscription_id_and_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|

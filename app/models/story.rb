@@ -3,6 +3,7 @@
 class Story < ApplicationRecord
   belongs_to :user
   belongs_to :item
+  has_and_belongs_to_many :tags
 
   delegate :feed,         to: :item
   delegate :title,        to: :item
