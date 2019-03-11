@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Story < ApplicationRecord
+  include Taggable
+
   belongs_to :user
   belongs_to :item
 
