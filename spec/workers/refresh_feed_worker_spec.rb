@@ -51,16 +51,12 @@ RSpec.describe RefreshFeedWorker, type: :worker do
       let(:user)          { FactoryBot.create(:user) }
       let!(:subscription) { FactoryBot.create(:subscription, user: user, feed: feed) }
 
-      before do
-        subscription.tags << FactoryBot.create(:tag)
-      end
-
       it "create a story for the user" do
         expect do
           run!
         end.to change { user.stories.reload.count }.from(0).to(2)
         expect(user.stories.first.item).to eql(feed.items.first)
-        expect(user.stories.first.tags.map(&:value)).to eql(subscription.tags.map(&:value))
+        expect(user.stories.first.tags).to eql(subscription.tags)
       end
 
       it "handles duplicate stories" do
