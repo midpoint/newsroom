@@ -31,6 +31,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -46,7 +47,6 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-json_expectations'
-  gem 'rspec-rails'
   gem 'rspec-sidekiq'
   gem 'timecop'
 end
