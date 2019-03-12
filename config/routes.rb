@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get '/search' => 'search#index'
 
-  resources :feeds, only: [:new, :create]
+  resources :subscriptions, only: [:new, :create]
   resources :items, only: [:new, :create]
 
   resources :stories, only: [] do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FeedsController, type: :controller do
+RSpec.describe SubscriptionsController, type: :controller do
   render_views
   let(:story) { FactoryBot.create(:story) }
   let(:user)  { story.user }
@@ -22,11 +22,11 @@ RSpec.describe FeedsController, type: :controller do
     let!(:feed) { FactoryBot.create(:feed) }
     let(:url)  { Faker::Internet.url }
 
-    it "creates a new feed" do
+    it "creates a subscription with a new feed" do
       expect(RefreshFeedWorker).to receive(:perform_async)
 
       expect do
-        post :create, params: { feed: { url: url } }
+        post :create, params: { subscription: { url: url } }
       end.to change(Feed, :count).by(1)
 
       expect(response).to redirect_to(root_path)
@@ -34,11 +34,11 @@ RSpec.describe FeedsController, type: :controller do
       expect(user.subscriptions.map(&:url)).to include(url)
     end
 
-    it "subscribes to an existing feed" do
+    it "creates a subscription with an existing feed" do
       expect(RefreshFeedWorker).to receive(:perform_async).with(feed.id)
 
       expect do
-        post :create, params: { feed: { url: feed.url } }
+        post :create, params: { subscription: { url: feed.url } }
       end.to change(Feed, :count).by(0)
 
       expect(response).to redirect_to(root_path)
@@ -49,7 +49,7 @@ RSpec.describe FeedsController, type: :controller do
     it "rerenders the new page" do
       expect(RefreshFeedWorker).not_to receive(:perform_async)
 
-      post :create, params: { feed: { url: "" } }
+      post :create, params: { subscription: { url: "" } }
       expect(response).to have_http_status(:ok)
     end
   end
