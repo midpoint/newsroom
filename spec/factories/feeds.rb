@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :feed do
-    title { Faker::HarryPotter.character }
+    title { Faker::Movies::HarryPotter.character }
     url { Faker::Internet.url }
     favicon_reloaded_at { Time.now }
   end

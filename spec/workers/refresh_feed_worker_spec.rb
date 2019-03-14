@@ -9,13 +9,13 @@ RSpec.describe RefreshFeedWorker, type: :worker do
   let(:entries)  { [
     OpenStruct.new(
       entry_id: SecureRandom.uuid,
-      title: Faker::DrWho.quote,
+      title: Faker::TvShows::DrWho.quote,
       url: Faker::Internet.url,
       published: DateTime.now
     ),
     OpenStruct.new(
       entry_id: SecureRandom.uuid,
-      title: Faker::DrWho.quote,
+      title: Faker::TvShows::DrWho.quote,
       url: Faker::Internet.url,
       published: DateTime.now
     )
@@ -74,7 +74,7 @@ RSpec.describe RefreshFeedWorker, type: :worker do
     end
 
     describe "when the title has changed" do
-      let(:title) { Faker::StarWars.quote }
+      let(:title) { Faker::Movies::StarWars.quote }
 
       it "updates the model" do
         expect do

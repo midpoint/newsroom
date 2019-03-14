@@ -12,7 +12,7 @@ RSpec.describe SyncItemWorker, type: :worker do
   end
 
   describe "when the title has changed" do
-    let(:title) { Faker::StarWars.quote }
+    let(:title) { Faker::Movies::StarWars.quote }
 
     it "does not update the model" do
       expect do
@@ -29,7 +29,7 @@ RSpec.describe SyncItemWorker, type: :worker do
     end
 
     describe "when the title has changed" do
-      let(:title) { Faker::StarWars.quote }
+      let(:title) { Faker::Movies::StarWars.quote }
 
       it "updates the model" do
         expect do
