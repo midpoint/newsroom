@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '2.6.1'
 
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.3.1'
 gem 'devise'
 gem 'excon'
 gem 'feathericon-sass'
