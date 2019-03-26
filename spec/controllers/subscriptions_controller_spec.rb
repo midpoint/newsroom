@@ -73,7 +73,10 @@ RSpec.describe SubscriptionsController, type: :controller do
       expect do
         patch :update, params: {
           id: subscription.id,
-          subscription: { tags: "hello, world" } }
+          subscription: {
+            tags: "hello, world"
+          }
+        }
       end.to change(Subscription, :count).by(0)
 
       expect(response).to redirect_to(root_path)
@@ -86,7 +89,10 @@ RSpec.describe SubscriptionsController, type: :controller do
       expect do
         patch :update, params: {
           id: subscription.id,
-          subscription: { tags: "hello, world" } }
+          subscription: {
+            tags: "hello, world"
+          }
+        }
       end.to change(Feed, :count).by(0)
 
       expect(response).to redirect_to(root_path)

@@ -60,4 +60,14 @@ RSpec.describe Search, type: :model do
       expect(d.first.feed).to eql(stories.first.feed)
     end
   end
+
+  describe "tag" do
+    let(:query) { "tag:#{stories.first.tags.first}" }
+
+    it "searches by feed" do
+      d = subject.run
+      expect(d.count).to eql(1)
+      expect(d.first.feed).to eql(stories.first.feed)
+    end
+  end
 end

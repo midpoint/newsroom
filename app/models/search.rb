@@ -13,6 +13,7 @@ class Search
     res = res.where("read_at IS #{query[:read] ? "NOT" : ""} NULL") if query.key?(:read)
     res = res.where("items.feed_id = ?", query[:feed]) if query.key?(:feed)
     res = res.where("items.title ILIKE ?", "%#{query[:search]}%") unless query[:search].blank?
+    res = res.where("? = ANY(stories.tags)", query[:tag]) if query.key?(:tag)
 
     include!(sort!(res))
   end

@@ -8,7 +8,7 @@ class SearchController < ApplicationController
       return redirect_to(q: 'read:false')
     end
 
-    @subscriptions = current_user.subscriptions.includes(:feed)
+    @subscriptions = current_user.subscriptions
     @stories = Search.new(query: params[:q], user: current_user).
                run.
                page((params[:page] || 1).to_i).per(ENTRIES_PER_PAGE)
