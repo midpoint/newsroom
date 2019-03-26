@@ -12,4 +12,9 @@ shared_examples_for "taggable" do
     subject.tags = ["foo", "bar", "foo"]
     expect(subject.tags).to eql(["foo", "bar"])
   end
+
+  it "handles tags passed as strings" do
+    subject.tags = "foo, bar"
+    expect(subject.tags).to eql(["foo", "bar"])
+  end
 end

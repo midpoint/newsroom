@@ -26,12 +26,13 @@ RSpec.describe SubscriptionsController, type: :controller do
       expect(RefreshFeedWorker).to receive(:perform_async)
 
       expect do
-        post :create, params: { subscription: { url: url } }
+        post :create, params: { subscription: { url: url, tags: "hello, world" } }
       end.to change(Feed, :count).by(1)
 
       expect(response).to redirect_to(root_path)
       expect(user.subscriptions.length).to eq(1)
       expect(user.subscriptions.map(&:url)).to include(url)
+      expect(user.subscriptions.map(&:tags)).to include(["hello", "world"])
     end
 
     it "creates a subscription with an existing feed" do

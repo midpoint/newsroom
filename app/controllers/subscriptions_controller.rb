@@ -20,6 +20,6 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    params.require(:subscription).permit(:url)
+    params.require(:subscription).permit(:url, :tags)
   end
 end
