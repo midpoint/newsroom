@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :story do
     user
     item
-    tags { [Faker::Artist.name, Faker::WorldOfWarcraft.hero] }
+    tags { [Faker::Artist.name, Faker::Games::WorldOfWarcraft.hero] }
   end
 end

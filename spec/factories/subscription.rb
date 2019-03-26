@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :subscription do
     user
     feed
-    tags { [Faker::Superhero.name, Faker::Pokemon.name] }
+    tags { [Faker::Superhero.name, Faker::Games::Pokemon.name] }
   end
 end
