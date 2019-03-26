@@ -5,6 +5,11 @@ class SubscriptionsController < ApplicationController
     @subscription = current_user.subscriptions.new(feed: Feed.new)
   end
 
+  def edit
+    @subscription = current_user.subscriptions.find(params[:id])
+    render :new
+  end
+
   def create
     data = subscription_params
     feed = Feed.where(url: data.delete(:url)).first_or_create
@@ -13,6 +18,16 @@ class SubscriptionsController < ApplicationController
     if @subscription.persisted?
       RefreshFeedWorker.perform_async(feed.id)
     end
+
+    respond_with @subscription, location: -> { root_path }
+  end
+
+  def update
+    data = subscription_params
+    data.delete(:url)
+
+    @subscription = current_user.subscriptions.find(params[:id])
+    @subscription.update(subscription_params)
 
     respond_with @subscription, location: -> { root_path }
   end
