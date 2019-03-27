@@ -69,5 +69,17 @@ RSpec.describe Search, type: :model do
       expect(d.count).to eql(1)
       expect(d.first.feed).to eql(stories.first.feed)
     end
+
+    describe "with a none search" do
+      let(:query) { "tag:none" }
+
+      it "searches for stories without a tag" do
+        story = FactoryBot.create(:story, user: user, tags: [])
+
+        d = subject.run
+        expect(d.count).to eql(1)
+        expect(d.first.feed).to eql(story.feed)
+      end
+    end
   end
 end
