@@ -28,6 +28,7 @@ class SubscriptionsController < ApplicationController
 
     @subscription = current_user.subscriptions.find(params[:id])
     @subscription.update(subscription_params)
+    SyncSubscriptionWorker.perform_async(@subscription.id)
 
     respond_with @subscription, location: -> { root_path }
   end

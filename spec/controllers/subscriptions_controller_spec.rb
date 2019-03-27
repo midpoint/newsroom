@@ -70,6 +70,8 @@ RSpec.describe SubscriptionsController, type: :controller do
     let(:url)  { Faker::Internet.url }
 
     it "updates a subscription" do
+      expect(SyncSubscriptionWorker).to receive(:perform_async)
+
       expect do
         patch :update, params: {
           id: subscription.id,
@@ -86,6 +88,8 @@ RSpec.describe SubscriptionsController, type: :controller do
     end
 
     it "cannot update the subscription's url" do
+      expect(SyncSubscriptionWorker).to receive(:perform_async)
+
       expect do
         patch :update, params: {
           id: subscription.id,
