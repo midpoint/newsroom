@@ -54,6 +54,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def organization_member?
     return true if org_id.blank?
+    return false if auth_token.blank?
     client.organization_member?(org_id, auth_hash.info&.nickname, headers: {
       'Cache-Control' => 'no-cache, no-store'
     })
