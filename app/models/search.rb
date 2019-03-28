@@ -2,7 +2,6 @@
 
 class Search
   attr_reader :query, :user
-  NO_TAG_TITLE = :none
 
   def initialize(query:, user:)
     @user = user
@@ -31,7 +30,7 @@ class Search
 
   def tag_search(res)
     return res unless query.key?(:tag)
-    return res.where("stories.tags = '{}'") if query[:tag].to_sym == NO_TAG_TITLE
+    return res.where("stories.tags = '{}'") if query[:tag] == Taggable::NO_TAG_TITLE
     res.where("? = ANY(stories.tags)", query[:tag])
   end
 

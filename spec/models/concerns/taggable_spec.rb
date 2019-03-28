@@ -17,4 +17,15 @@ shared_examples_for "taggable" do
     subject.tags = "foo, bar"
     expect(subject.tags).to eql(["foo", "bar"])
   end
+
+  it "defaults to the default tag" do
+    subject.tags = []
+    expect(subject.tags).to eql([Taggable::NO_TAG_TITLE])
+  end
+
+  it "removes the no tag when adding some" do
+    subject.tags = []
+    subject.tags = subject.tags + ["hello"]
+    expect(subject.tags).to eql(["hello"])
+  end
 end
