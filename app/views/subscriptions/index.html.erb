@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <main role="main" class="subscriptions col-md-9 ml-sm-auto col-lg-12">
+      <% if @subscriptions.length > 0 %>
+        <div class="list-group subscriptions">
+          <% @subscriptions.each do |subscription| %>
+            <%= link_to edit_subscription_url(subscription),
+              class: "list-group-item list-group-item-action #{subscription.feed.error? ? "list-group-item-danger" : ""}" do %>
+              <span><%= feed_favicon(subscription.feed) %></span>
+              <span><%= feed_title(subscription.feed) %></span>
+            <% end %>
+          <% end %>
+        </div>
+
+      <% else %>
+        <div class="text-center inbox-zero">
+          <h2>No Subscriptions Found!</h2>
+        </div>
+      <% end %>
+    </main>
+  </div>
+</div>

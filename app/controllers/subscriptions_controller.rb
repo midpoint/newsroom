@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
+
+  def index
+    @subscriptions = current_user.subscriptions
+  end
+
   def new
     @subscription = current_user.subscriptions.new(feed: Feed.new)
   end
@@ -19,7 +24,7 @@ class SubscriptionsController < ApplicationController
       RefreshFeedWorker.perform_async(feed.id)
     end
 
-    respond_with @subscription, location: -> { root_path }
+    respond_with @subscription, location: -> { subscriptions_path }
   end
 
   def update
@@ -30,7 +35,7 @@ class SubscriptionsController < ApplicationController
     @subscription.update(subscription_params)
     SyncSubscriptionWorker.perform_async(@subscription.id)
 
-    respond_with @subscription, location: -> { root_path }
+    respond_with @subscription, location: -> { subscriptions_path }
   end
 
   private

@@ -12,6 +12,13 @@ RSpec.describe SubscriptionsController, type: :controller do
     sign_in user
   end
 
+  describe "index" do
+    it "renders the template" do
+      get :index
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "new" do
     it "renders the template" do
       get :new
@@ -40,7 +47,7 @@ RSpec.describe SubscriptionsController, type: :controller do
         end.to change(user.subscriptions, :count).by(1)
       end.to change(Feed, :count).by(1)
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(subscriptions_path)
       expect(user.subscriptions.map(&:url)).to include(url)
       expect(user.subscriptions.map(&:tags)).to include(["hello", "world"])
     end
@@ -54,7 +61,7 @@ RSpec.describe SubscriptionsController, type: :controller do
         end.to change(user.subscriptions, :count).by(1)
       end.to change(Feed, :count).by(0)
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(subscriptions_path)
       expect(user.subscriptions.map(&:url)).to include(feed.url)
     end
 
@@ -81,7 +88,7 @@ RSpec.describe SubscriptionsController, type: :controller do
         }
       end.to change(Subscription, :count).by(0)
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(subscriptions_path)
       expect(user.subscriptions.length).to eq(1)
       expect(user.subscriptions.map(&:url)).to include(feed.url)
       expect(user.subscriptions.map(&:tags)).to include(["hello", "world"])
@@ -99,7 +106,7 @@ RSpec.describe SubscriptionsController, type: :controller do
         }
       end.to change(Feed, :count).by(0)
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(subscriptions_path)
       expect(user.subscriptions.length).to eq(1)
       expect(user.subscriptions.map(&:url)).to include(feed.url)
       expect(user.subscriptions.map(&:tags)).to include(["hello", "world"])
