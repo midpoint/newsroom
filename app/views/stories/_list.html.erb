@@ -8,8 +8,17 @@
         <%= feed_favicon(story.feed) %>
         <%= story.title.blank? ? story.url : story.title %>
       </div>
-      <div class="ml-auto" title="<%= l story.published_at, format: :short %>">
-        <%= time_ago_in_words(story.published_at) %> ago
+
+      <div class="d-flex ml-auto">
+        <div>
+          <% story.tags.each do |tag| %>
+            <span class="badge badge-secondary"><%= tag %></span>
+          <% end %>
+        </div>
+
+        <div class="ml-4 published_at" title="<%= l story.published_at, format: :short %>">
+          <%= time_ago_in_words(story.published_at) %> ago
+        </div>
       </div>
     <% end %>
   <% end %>

@@ -9,5 +9,10 @@
     &.unread {
       font-weight: bold;
     }
+
+    .published_at {
+      width: 140px;
+      text-align: right;
+    }
   }
 }

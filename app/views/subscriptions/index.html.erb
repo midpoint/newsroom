@@ -5,9 +5,17 @@
         <div class="list-group subscriptions">
           <% @subscriptions.each do |subscription| %>
             <%= link_to edit_subscription_url(subscription),
-              class: "list-group-item list-group-item-action #{subscription.feed.error? ? "list-group-item-danger" : ""}" do %>
-              <span><%= feed_favicon(subscription.feed) %></span>
-              <span><%= feed_title(subscription.feed) %></span>
+              class: "list-group-item list-group-item-action d-flex #{subscription.feed.error? ? "list-group-item-danger" : ""}" do %>
+              <div>
+                <span><%= feed_favicon(subscription.feed) %></span>
+                <span><%= feed_title(subscription.feed) %></span>
+              </div>
+
+              <div class="ml-auto">
+                <% subscription.tags.each do |tag| %>
+                  <span class="badge badge-secondary"><%= tag %></span>
+                <% end %>
+              </div>
             <% end %>
           <% end %>
         </div>
