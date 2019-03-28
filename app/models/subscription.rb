@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Subscription < ApplicationRecord
+  include Taggable
+
   belongs_to :user
   belongs_to :feed
 

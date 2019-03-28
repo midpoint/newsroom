@@ -4,12 +4,5 @@
     <%= form_tag('/search', class: 'w-100', method: :get) do %>
       <%= text_field_tag 'q', params[:q], class: 'form-control form-control-dark w-100', placeholder: "Search" %>
     <% end %>
-
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <%= link_to "New Item", new_item_url, class: "nav-link" %>
-      </li>
-    </ul>
-    </div>
   </nav>
 </header>

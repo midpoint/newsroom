@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_142506) do
+ActiveRecord::Schema.define(version: 2019_03_11_123011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_142506) do
     t.datetime "favicon_reloaded_at"
     t.text "favicon"
     t.index ["url"], name: "index_feeds_on_url", unique: true
-  end
-
-  create_table "feeds_tags", id: false, force: :cascade do |t|
-    t.bigint "feed_id", null: false
-    t.bigint "tag_id", null: false
-    t.index ["feed_id", "tag_id"], name: "index_feeds_tags_on_feed_id_and_tag_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -48,13 +42,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_142506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "read_at"
+    t.text "tags", default: [], array: true
     t.index ["user_id", "item_id"], name: "index_stories_on_user_id_and_item_id", unique: true
-  end
-
-  create_table "stories_tags", id: false, force: :cascade do |t|
-    t.bigint "story_id", null: false
-    t.bigint "tag_id", null: false
-    t.index ["story_id", "tag_id"], name: "index_stories_tags_on_story_id_and_tag_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -62,14 +51,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_142506) do
     t.integer "feed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "tags", default: [], array: true
     t.index ["user_id", "feed_id"], name: "index_subscriptions_on_user_id_and_feed_id", unique: true
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["value"], name: "index_tags_on_value", unique: true
   end
 
   create_table "users", force: :cascade do |t|

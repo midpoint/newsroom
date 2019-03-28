@@ -2,6 +2,7 @@
 
 class Search
   attr_reader :query, :user
+  NO_TAG_TITLE = :none
 
   def initialize(query:, user:)
     @user = user
@@ -13,6 +14,7 @@ class Search
     res = res.where("read_at IS #{query[:read] ? "NOT" : ""} NULL") if query.key?(:read)
     res = res.where("items.feed_id = ?", query[:feed]) if query.key?(:feed)
     res = res.where("items.title ILIKE ?", "%#{query[:search]}%") unless query[:search].blank?
+    res = tag_search(res)
 
     include!(sort!(res))
   end
@@ -25,6 +27,12 @@ class Search
 
   def include!(scope)
     scope.includes(item: :feed)
+  end
+
+  def tag_search(res)
+    return res unless query.key?(:tag)
+    return res.where("stories.tags = '{}'") if query[:tag].to_sym == NO_TAG_TITLE
+    res.where("? = ANY(stories.tags)", query[:tag])
   end
 
   def parse_query!(query)
