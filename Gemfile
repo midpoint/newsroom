@@ -16,7 +16,7 @@ gem 'octokit'
 gem 'omniauth-github'
 gem 'pg'
 gem 'puma', '~> 3.12'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
 gem "responders"
 gem 'sass-rails', '~> 5.0'
 gem "sentry-raven"
