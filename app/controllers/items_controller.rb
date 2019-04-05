@@ -14,7 +14,9 @@ class ItemsController < ApplicationController
 
     if @item.persisted?
       SyncItemWorker.perform_async(@item.id)
-      current_user.stories.where(item_id: @item.id).first_or_create!
+      current_user.stories.where(item_id: @item.id).first_or_create! do |s|
+        s.tags = Tag::AUTOMATED_MANUAL
+      end
     end
 
     respond_with @item, location: -> { root_path }

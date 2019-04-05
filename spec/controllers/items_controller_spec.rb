@@ -31,6 +31,7 @@ RSpec.describe ItemsController, type: :controller do
 
       expect(response).to redirect_to(root_path)
       expect(user.stories.map(&:url)).to include(url)
+      expect(user.stories.map(&:tags)).to include(['manual'])
     end
 
     it "creates a new item in json" do
