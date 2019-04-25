@@ -16,7 +16,7 @@ gem 'octokit'
 gem 'omniauth-github'
 gem 'pg'
 gem 'puma', '~> 3.12'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '6.0.0.rc1'
 gem "responders"
 gem 'sass-rails', '~> 5.0'
 gem "sentry-raven"
@@ -37,6 +37,7 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
