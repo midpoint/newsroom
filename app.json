@@ -25,7 +25,7 @@
       "value": "production"
     },
     "RAVEN_DSN": {
-      "description": "The sentry credentials",
+      "description": "The sentry credentials"
     },
     "SECRET_KEY_BASE": {
       "description": "The session secret used to encrypt and sign session cookies",
