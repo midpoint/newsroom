@@ -7,8 +7,8 @@ class Subscription < ApplicationRecord
   belongs_to :feed
 
   validates :feed_id,
-    presence: true,
-    uniqueness: { scope: :user_id }
+            presence: true,
+            uniqueness: { scope: :user_id }
 
   delegate :title,   to: :feed
   delegate :url,     to: :feed

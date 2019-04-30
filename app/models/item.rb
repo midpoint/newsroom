@@ -2,14 +2,14 @@
 
 class Item < ApplicationRecord
   belongs_to :feed,
-    optional: true
+             optional: true
   has_many :stories,
-    dependent: :destroy
+           dependent: :destroy
 
   validates :url,
-    presence: true,
-    uniqueness: { scope: :feed }
+            presence: true,
+            uniqueness: { scope: :feed }
 
   validates :published_at,
-    presence: true
+            presence: true
 end
