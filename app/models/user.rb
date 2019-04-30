@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   devise :rememberable,
-    :omniauthable, omniauth_providers: [:github]
+         :omniauthable, omniauth_providers: [:github]
 
   has_many :subscriptions
   has_many :stories
