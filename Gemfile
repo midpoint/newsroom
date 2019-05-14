@@ -10,7 +10,7 @@ gem 'devise'
 gem 'excon'
 gem 'feathericon-sass'
 gem "feedjira", github: "feedjira/feedjira"
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.9'
 gem 'kaminari'
 gem 'octokit'
 gem 'omniauth-github'
