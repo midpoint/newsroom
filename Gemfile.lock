@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/feedjira/feedjira.git
-  revision: b91ff6feb9dd3d75c81edc9970f9c025d1dc964c
+  revision: 9873902ed419229e503ec2d2665a170186fceabd
   specs:
     feedjira (3.0.0.beta1)
       loofah (>= 2.2.1)
