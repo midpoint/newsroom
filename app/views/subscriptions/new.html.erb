@@ -5,6 +5,10 @@
         <h1 class="h2"><%= @subscription.persisted? ? "Edit subscription" : "Create a new subscription" %></h1>
       </div>
 
+      <%- if @subscription.feed.error? -%>
+        <div class="alert alert-danger" role="alert"><%= @subscription.feed.error %></div>
+      <%- end -%>
+
       <%= form_for @subscription do |f| %>
         <div class="form-row">
           <div class="form-group col-md-11">

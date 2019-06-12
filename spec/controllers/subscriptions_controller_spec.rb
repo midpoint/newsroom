@@ -27,10 +27,17 @@ RSpec.describe SubscriptionsController, type: :controller do
   end
 
   describe "edit" do
-
     it "renders the template" do
       get :edit, params: { id: subscription.id }
       expect(response).to have_http_status(:ok)
+    end
+
+    it "renders the template with feed error" do
+      feed.update(error: "Some Error")
+
+      get :edit, params: { id: subscription.id }
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Some Error")
     end
   end
 
