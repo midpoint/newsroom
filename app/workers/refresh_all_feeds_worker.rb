@@ -8,6 +8,7 @@ class RefreshAllFeedsWorker
 
   def perform
     feeds.each do |feed|
+      next if feed.subscriptions.empty?
       RefreshFeedWorker.perform_async(feed.id)
     end
   end
