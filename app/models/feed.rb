@@ -2,7 +2,7 @@
 
 class Feed < ApplicationRecord
   has_many :items,
-           dependent: :destroy
+           dependent: :nullify
   has_many :subscriptions,
            dependent: :destroy
 

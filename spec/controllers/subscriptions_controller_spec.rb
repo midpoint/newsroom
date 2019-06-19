@@ -119,4 +119,15 @@ RSpec.describe SubscriptionsController, type: :controller do
       expect(user.subscriptions.map(&:tags)).to include(["hello", "world"])
     end
   end
+
+  describe "destroy" do
+    it "destroys a subscription" do
+      expect do
+        delete :destroy, params: { id: subscription.id }
+      end.to change(Subscription, :count).by(-1)
+
+      expect(response).to redirect_to(subscriptions_path)
+      expect(user.subscriptions.length).to eq(0)
+    end
+  end
 end

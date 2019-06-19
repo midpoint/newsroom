@@ -38,6 +38,13 @@ class SubscriptionsController < ApplicationController
     respond_with @subscription, location: -> { subscriptions_path }
   end
 
+  def destroy
+    @subscription = current_user.subscriptions.find(params[:id])
+    @subscription.destroy
+
+    redirect_to subscriptions_path
+  end
+
   private
 
   def subscription_params
