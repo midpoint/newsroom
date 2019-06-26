@@ -15,7 +15,7 @@ gem 'kaminari'
 gem 'octokit'
 gem 'omniauth-github'
 gem 'pg'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.0'
 gem 'rails', '6.0.0.rc1'
 gem "responders"
 gem 'sass-rails', '~> 5.0'
